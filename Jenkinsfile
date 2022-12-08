@@ -6,12 +6,6 @@ pipeline{
     }
         stages{
             stage('sonar quality check'){
-/*                 agent{
-                    docker {
-
-                        image 'maven'
-                    }
-                } */
                     steps{
                         script{
                             withSonarQubeEnv(credentialsId: "${api_jenkins_sq}") {
@@ -19,14 +13,6 @@ pipeline{
                             }
                         }
                     }
-            }
-            stage('Quality Gate Status'){
-                steps{
-                    script{
-                        waitForQualityGate abortPipeline: false, credentialsId: 'sonarqube_secret'                        
-                    }
-                }      
-            }
         }
     }
 }
