@@ -20,17 +20,14 @@ pipeline{
                             }
                         }
                     }
-                    stage{
-                        steps{
-                            script{
+                    
+                    steps{
+                        script{
 
-                                waitForQualityGate abortPipeline: false, credentialsId: 'sonarqube_secret'
-                            }
+                            waitForQualityGate abortPipeline: false, credentialsId: 'sonarqube_secret'
+                        }
 
-                        }        
-
-
-                    }
+                    }                       
             }
         }
 }
