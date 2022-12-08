@@ -1,5 +1,9 @@
 pipeline{
     agent any
+        environment {
+        api_jenkins_sq = 'sonarqube_secret'
+        
+    }
         stages{
             stage('sonar quality check'){
 /*                 agent{
@@ -10,7 +14,7 @@ pipeline{
                 } */
                     steps{
                         script{
-                            withSonarQubeEnv(credentialsId: 'sonarqube_secret') {
+                            withSonarQubeEnv(credentialsId: '${api_jenkins_sq}') {
                                 sh 'mvn clean package sonar:sonar'
                          
                             }
