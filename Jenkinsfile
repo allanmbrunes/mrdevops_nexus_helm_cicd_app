@@ -1,9 +1,9 @@
 pipeline{
     agent any
-        environment {
-        // api_jenkins_sq = 'sonarqube_secret'
+    //     environment {
+    //     api_jenkins_sq = 'sonarqube_secret'
         
-    }
+    // }
         stages{
             stage('sonar quality check'){
                 steps{
