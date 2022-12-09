@@ -1,9 +1,9 @@
 pipeline{
     agent any
-    //     environment {
-    //     api_jenkins_sq = 'sonarqube_secret'
+        environment {
+        VERSION = "${env.BUILD_ID}"
         
-    // }
+    }
         stages{
             stage('sonar quality check'){
                 steps{
@@ -21,15 +21,23 @@ pipeline{
                     }
                 }      
             }
-            // stage('Docker build & docker push to Nexus repo'){
-            //     steps{
-            //         script{
+            stage('Docker build & docker push to Nexus repo'){
+                steps{
+                    script{
+                        withCredentials([string(credentialsId: 'Nexus_pass', variable: 'nexus')])
+                        sh '''
+                         docker build -t localhost:8083/springapp:${VERSION} .
+                         
+                         docker login -u admin -p $Nexus_pass localhost:8083
+
+                         docker push localhost:8083/springapp:${VERSION}
+
+                         docker rmi localhost:8083/springapp:${VERSION}
+                        '''
+                    }
+                } 
 
 
-            //         }
-            //     } 
-
-
-            // }
+            }
         }
     }
