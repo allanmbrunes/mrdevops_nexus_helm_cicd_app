@@ -44,15 +44,12 @@ pipeline{
                 steps{
                     script{
                         dir('kubernetes/myapp/') {
-                            sh 'helm datree test [CHART_DIRECTORY]'
+                            sh 'datree test .'
                         }        
 
                     }
                     
                 } 
-
-
-
             }
         }
     }
